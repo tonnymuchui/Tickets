@@ -34,13 +34,26 @@ describe("ticketListReducer", () => {
       id: id,
     };
     expect(ticketListReducer({}, action)).toEqual({
-        [id] : {
+      [id]: {
         names: names,
         location: location,
         issue: issue,
-        id: id
-  }
-});
+        id: id,
+      },
+    });
+  });
+  test("Should successfully delete a ticket", () => {
+    action = {
+      type: "DELETE_TICKET",
+      id: 1,
+    };
+    expect(ticketListReducer(currentState, action)).toEqual({
+      2: {
+        names: "Jasmine and Justine",
+        location: "2a",
+        issue: "Reducer has side effects.",
+        id: 2,
+      },
+    });
   });
 });
-
