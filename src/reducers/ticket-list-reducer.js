@@ -12,11 +12,11 @@ const reducer = (state = {}, action) => {
         },
       });
     case "DELETE_TICKET":
-        const newState = {...state};
-        delete newState[id];
-        return newState;
+      const newState = { ...state };
+      delete newState[id];
+      return newState;
     default:
-        return state;
+      return state;
   }
 };
 export default reducer;
