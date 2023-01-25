@@ -2,6 +2,7 @@ import React from "react";
 import TicketList from "./TicketList";
 import TicketDetail from "./TicketDetail";
 import NewTicketForm from "./NewTicketForm";
+import EditTicketForm from "./EditTicketForm";
 
 class TicketControl extends React.Component {
   constructor(props) {
@@ -10,22 +11,29 @@ class TicketControl extends React.Component {
       formVisibleOnPage: false,
       mainTicketList: [],
       selectedTicket: null,
+      editing: false,
     };
     this.handleClick = this.handleClick.bind(this);
   }
+
+  handleEditClick = () => {
+    this.setState({ editing: true });
+  };
 
   handleClick = () => {
     if (this.state.selectedTicket != null) {
       this.setState({
         formVisibleOnPage: false,
         selectedTicket: null,
+        editing: false // new code
       });
     } else {
-      this.setState((prevState) => ({
+      this.setState(prevState => ({
         formVisibleOnPage: !prevState.formVisibleOnPage,
       }));
     }
-  };
+  }
+
   handleDeletingTicket = (id) => {
     const newMainTicketList = this.state.mainTicketList.filter(
       (ticket) => ticket.id !== id
@@ -49,15 +57,36 @@ class TicketControl extends React.Component {
     )[0];
     this.setState({ selectedTicket: selectedTicket });
   };
+
+  handleEditingTicketInList = (ticketToEdit) => {
+    const editedMainTicketList = this.state.mainTicketList
+      .filter((ticket) => ticket.id !== this.state.selectedTicket.id)
+      .concat(ticketToEdit);
+    this.setState({
+      mainTicketList: editedMainTicketList,
+      editing: false,
+      selectedTicket: null,
+    });
+  };
+
   render() {
     let currentlyVisibleState = null;
     let buttonText = null;
 
-    if (this.state.selectedTicket != null) {
+    if (this.state.editing) {
+      currentlyVisibleState = (
+        <EditTicketForm
+          ticket={this.state.selectedTicket}
+          onEditTicket={this.handleEditingTicketInList}
+        />
+      );
+      buttonText = "Return to Ticket List";
+    } else if (this.state.selectedTicket != null) {
       currentlyVisibleState = (
         <TicketDetail
           ticket={this.state.selectedTicket}
           onClickingDelete={this.handleDeletingTicket}
+          onClickingEdit={this.handleEditClick}
         />
       );
       buttonText = "Return to Ticket List";
