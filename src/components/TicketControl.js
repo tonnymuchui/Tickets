@@ -93,13 +93,13 @@ class TicketControl extends React.Component {
       ticket={this.state.selectedTicket} 
       onClickingDelete={this.handleDeletingTicket}
       onClickingEdit = {this.handleEditClick} />
-      buttonText = "Return to Ticket List";
+      buttonText = "Return to TicketList";
     } else if (this.state.formVisibleOnPage) {
       currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList}/>;
-      buttonText = "Return to Ticket List"; 
+      buttonText = "Return to TicketList"; 
     } else {
       currentlyVisibleState = <TicketList onTicketSelection={this.handleChangingSelectedTicket} ticketList={this.state.mainTicketList} />;
-      buttonText = "Add Ticket"; 
+      buttonText = "Add new Ticket"; 
     }
     return (
       <React.Fragment>
