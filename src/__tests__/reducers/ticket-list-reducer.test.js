@@ -12,7 +12,7 @@ describe("ticketListReducer", () => {
     },
     2: {
       names: "Jasmine and Justine",
-      location: "2a",
+      location: "2b",
       issue: "Reducer has side effects.",
       id: 2,
     },
@@ -50,7 +50,7 @@ describe("ticketListReducer", () => {
     expect(ticketListReducer(currentState, action)).toEqual({
       2: {
         names: "Jasmine and Justine",
-        location: "2a",
+        location: "2b",
         issue: "Reducer has side effects.",
         id: 2,
       },
