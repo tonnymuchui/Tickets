@@ -24,7 +24,7 @@ describe("ticketListReducer", () => {
     id: 1,
   };
 
-  test("should successfully add new ticket data to mainticket", () => {
+  test("should successfully add new ticket to mainticket", () => {
     const { names, location, issue, id } = ticketData;
     action = {
       type: "ADD_TICKET",
